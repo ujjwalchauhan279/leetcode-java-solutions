@@ -1,0 +1,44 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. add dummy node to head
+2. divide list three parts , one upto left and second part upto right and third remaining
+3. reverse list between left to right
+4. merge all three parts again and return it
+
+*/
+
+
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode fwd = null;
+        while(curr!=null){
+            fwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = fwd;
+        }
+        return prev;
+    }
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next=head;
+        ListNode i=dummy;
+        ListNode j=dummy;
+        for(int k=1; k<=left-1; k++) i=i.next;
+        for(int k=1; k<=right; k++) j=j.next;
+        ListNode head1=i.next;
+        i.next=null;
+        ListNode head2=j.next;
+        j.next=null;
+        head1=reverse(head1);
+        i.next=head1;
+        while(i.next!=null) i=i.next;
+        i.next=head2;
+        return dummy.next;
+    }
+}
