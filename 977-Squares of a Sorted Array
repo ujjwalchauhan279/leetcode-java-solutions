@@ -1,0 +1,37 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Square each element and store in original nums array.
+2. Then we take two pointers approach , left and right.
+3. make result array to store the array.
+4. compare left and right value and as the array is sorted we know large element only either comes from leftmost or from rightmost element
+5. by comparing store largest element from end of result array and return it.
+
+*/
+
+
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        for (int i=0; i<nums.length; i++) nums[i] = nums[i]*nums[i];
+        int left=0;
+        int right=nums.length-1;
+        int result[] = new int[nums.length];
+        int k = result.length-1;
+        while(left<=right){
+            if(nums[left]>nums[right]){
+                result[k]=nums[left];
+                k--;
+                left++;
+            }
+            else{
+                result[k]=nums[right];
+                k--;
+                right--;
+            }
+        }
+        return result;
+    }
+}
