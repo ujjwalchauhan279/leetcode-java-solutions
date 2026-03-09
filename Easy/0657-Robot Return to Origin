@@ -1,0 +1,35 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. iterate over the given string 
+2. use two variable to store direction 
+3. check whether both pointer are at 0 or not
+
+*/
+
+
+
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int x = 0, y = 0;
+        for (char c = 0; c < moves.length(); c++) {
+            switch (moves.charAt(c)) {
+                case 'U':
+                    y++;
+                    break;
+                case 'D':
+                    y--;
+                    break;
+                case 'L':
+                    x--;
+                    break;
+                case 'R':
+                    x++;
+                    break;
+            }
+        }
+        return (x == 0 && y == 0);
+    }
+}
