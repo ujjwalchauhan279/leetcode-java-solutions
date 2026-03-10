@@ -1,0 +1,29 @@
+/* 
+
+Time Complexity: O(m x n)
+Space Complexity: O(1)
+Approach:
+
+Brute Force
+
+1. traverse in each row and then compute sum by adding all elements in column
+2. store sum in sum variable and compare sum with maxsum (earlier sum)
+3. return the maximum sum
+
+*/
+
+
+
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int sum , maxsum=0;
+        for(int i=0;i<accounts.length;i++){
+            sum=0;
+            for(int j=0;j<accounts[0].length;j++){
+                sum += accounts[i][j];
+            }
+            maxsum = Math.max(maxsum, sum);
+        }
+        return maxsum;
+    }
+}
