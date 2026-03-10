@@ -1,0 +1,26 @@
+/* 
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+Approach:
+1. make two pointers , low & high
+2. find out middle element , if middle element==target return index
+3. if middle element<target , target lies on right half
+4. else target lies on left half
+5. if target not found , return -1
+
+*/
+
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int low=0,high=nums.length-1,mid=0;
+        while(low<=high){
+            mid=low+(high-low)/2;
+            if(nums[mid]==target) return mid;
+            else if(nums[mid]<target) low=mid+1;
+            else high=mid-1;
+        }
+        return -1;
+    }
+}
