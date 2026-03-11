@@ -1,0 +1,22 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. make loop from 0 to n
+2. iterate over it and store XOR of each element in ans
+3. XOR has a property that for same number , XOR return 0 and with unique number XOR 0 gives that number
+4. return ans
+
+*/
+
+
+class Solution {
+    public int xorOperation(int n, int start) {
+        int ans=0;
+        for(int i=0; i<n; i++){
+            ans^=start + 2*i;
+        }
+        return ans;
+    }
+}
