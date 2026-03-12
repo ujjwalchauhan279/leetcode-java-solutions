@@ -1,0 +1,28 @@
+/* 
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+Approach:
+1. If n == 0, return 1 because complement of 0 is 1.
+2. Create a mask containing all 1s up to the highest bit of n.
+3. Build the mask using:
+      left shift mask <<= 1
+      set last bit mask |= 1
+      Stop when mask ≥ n.
+4. Take XOR of n with mask to flip all bits.
+
+*/
+
+
+
+class Solution {
+    public int bitwiseComplement(int n) {
+        if(n==0) return 1;
+        int mask=0;
+        while(mask<n){
+            mask<<=1;
+            mask|=1;
+        }
+        return n ^ mask;
+    }
+}
