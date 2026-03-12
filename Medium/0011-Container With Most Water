@@ -1,0 +1,34 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Use two pointers:
+      left = 0
+      right = height.length - 1
+2. While left < right:
+      Calculate area = min(height[left],height[right])×(right−left)
+3. Update maxarea.
+4. Move the pointer with smaller height:
+      If height[left] < height[right] → left++
+      Else → right--
+5. Continue until pointers meet.
+
+*/
+
+
+class Solution {
+    public int maxArea(int[] height) {
+        int left=0;
+        int right=height.length-1;
+        int area=0;
+        int maxarea=0;
+        while(left<right){
+            area=(int)Math.min(height[left] , height[right]) * (right-left);
+            maxarea=(int)Math.max(maxarea , area);
+            if(height[left]<height[right]) left++;
+            else right--;
+        }
+        return maxarea;
+    }
+}
