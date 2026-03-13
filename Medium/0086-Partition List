@@ -1,0 +1,58 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Create two dummy lists:
+      dummy1 → nodes < x
+      dummy2 → nodes ≥ x
+2. Traverse the original list using pointer i.
+3. For each node:
+      If i.val < x → attach it to first list (temp1).
+      Else → attach it to second list (temp2).
+4. After traversal:
+      Set temp2.next = null (important to avoid cycle).
+5. Connect the two lists.
+
+*/
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode dummy1 = new ListNode(-1);
+        ListNode dummy2 = new ListNode(-1);
+        ListNode temp1 = dummy1;
+        ListNode temp2 = dummy2;
+        ListNode i = head;
+        while(i!=null){
+            if(i.val<x){
+                temp1.next=i;
+                temp1=i;
+                i=i.next;
+            }
+            else{
+                temp2.next=i;
+                temp2=i;
+                i=i.next;
+            }
+        }
+        temp2.next=null;
+        temp1.next=dummy2.next;
+        //temp2.next=null;
+        // temp1 = dummy1; 
+        // temp2 = dummy2; 
+        // while(temp1.next!=null) temp1=temp1.next;
+        // temp1.next=temp2.next;
+        return dummy1.next;
+    }
+}
