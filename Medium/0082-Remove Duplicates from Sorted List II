@@ -1,0 +1,58 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Create a dummy node (extra) to build the result list.
+2. Use pointer slow to traverse the list.
+3. If slow has duplicates (slow.val == slow.next.val):
+    Use fast to skip all nodes having the same value.
+    Move slow to the next different value.
+4. If the value is not duplicated:
+    Attach that node to the result list (temp).
+    Move both temp and slow forward.
+5. At the end set:
+    temp.next = slow
+6. Return:
+    extra.next
+
+*/
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode extra = new ListNode(-1);
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode temp = extra;
+        while (slow != null) {
+            if (slow.next!=null && slow.val == slow.next.val) {
+                fast = slow.next;
+                while (fast!=null && fast.val == slow.val) {
+                    fast = fast.next;
+                }
+                slow = fast;
+            }
+            else {
+                temp.next=slow;
+                temp=slow;
+                slow=slow.next;
+            }
+        }
+        temp.next=slow;
+        return extra.next;
+    }
+}
