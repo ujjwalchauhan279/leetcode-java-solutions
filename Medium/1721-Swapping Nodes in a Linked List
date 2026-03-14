@@ -1,0 +1,46 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Move fast k steps ahead from head.
+2. Use two pointers (fast, slow):
+    Move both until fast becomes null.
+    Now slow points to the k-th node from the end.
+3. Reset fast = head.
+4. Move fast k−1 steps to reach the k-th node from the start.
+5. Swap their values.
+
+*/
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode slow = head;
+        ListNode fast = head;
+        for(int i=1; i<=k; i++) fast=fast.next;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        fast = head;
+        for(int i=1; i<k; i++) fast=fast.next;
+        int temp = slow.val;
+        slow.val = fast.val;
+        fast.val = temp;
+        
+        return head;
+    }
+}
