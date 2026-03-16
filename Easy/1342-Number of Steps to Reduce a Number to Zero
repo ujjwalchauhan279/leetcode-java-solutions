@@ -1,0 +1,27 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Initialize count = 0.
+2. While num > 0:
+    If num is even → divide by 2 (num = num / 2).
+    If num is odd → subtract 1 (num--).
+3. Increase count after every operation.
+4. When num becomes 0, return count.
+
+*/
+
+
+
+class Solution {
+    public int numberOfSteps(int num) {
+        int count=0;
+        while(num>0){
+            if(num%2==0) num/=2;
+            else num--;
+            count++;
+        }
+        return count;
+    }
+}
