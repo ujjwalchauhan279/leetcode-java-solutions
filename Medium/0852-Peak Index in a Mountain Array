@@ -1,0 +1,33 @@
+/* 
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+Approach:
+1. Use Binary Search because the array is increasing then decreasing.
+2. Set:
+    low = 0
+    high = arr.length - 2
+3. While low < high:
+    Find mid.
+    If arr[mid] < arr[mid+1] → we are in the increasing part, so move right
+        low = mid + 1
+    Else → we are in the decreasing part, so move left
+        high = mid
+4. When loop ends, low points to the peak element index.
+
+*/
+
+
+
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int low=0;
+        int high=arr.length-2;
+        while(low<high){
+            int mid = low + (high-low)/2;
+            if(arr[mid]<arr[mid+1]) low=mid+1;
+            else high=mid;
+        }
+        return low;
+    }
+}
