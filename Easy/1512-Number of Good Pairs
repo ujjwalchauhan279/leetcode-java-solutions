@@ -1,0 +1,41 @@
+/* 
+
+Time Complexity: 
+  Let n = nums.length, k = max element
+    Find max → O(n)
+    Build freq → O(n)
+    Traverse freq → O(k)
+
+                  Total = O(n+k)
+
+Space Complexity: O(k)
+
+Approach:
+1. Find the maximum value in array → to size the freq array.
+2. Create a frequency array.
+3. Count frequency of each number.
+4. For each frequency f, calculate number of pairs:
+    [ f × (f−1) ] / 2
+5. Add all pairs to get the answer.
+
+*/
+
+
+
+class Solution {
+    public int numIdenticalPairs(int[] nums) {
+        int max=0;
+        for(int i=0; i<nums.length; i++){
+            max=(int)Math.max(nums[i], max);
+        }
+        int freq[] = new int[max+1];
+        for(int i=0; i<nums.length; i++){
+            freq[nums[i]]++;
+        }
+        int ans=0;
+        for(int i=0; i<freq.length; i++){
+            ans+= (freq[i] * (freq[i]-1))/2;
+        }
+        return ans;
+    }
+}
