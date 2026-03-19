@@ -1,0 +1,66 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Reverse the list → process from least significant digit.
+2. Traverse and:
+    Multiply each digit by 2
+    Add carry
+    Create new node with sum % 10
+3. Maintain carry = sum / 10
+4. If carry remains → add new node.
+5. Reverse again to restore original order.
+
+*/
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode fwd = null;
+        while(curr!=null){
+            fwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = fwd;
+        }
+        return prev;
+    }
+    public ListNode doubleIt(ListNode head) {
+        head = reverse(head);
+        int carry=0;
+        ListNode temp = head;
+        ListNode dummy = new ListNode(-1);
+        ListNode t = dummy;
+        while(temp!=null){
+            int sum = (2*temp.val) + carry;
+            ListNode a = new ListNode(sum%10);
+            t.next = a;
+            carry = sum/10;
+            t = t.next;
+            temp = temp.next;
+            
+        }
+        if(carry==1){
+            ListNode a = new ListNode(1);
+            t.next = a;
+        }
+        dummy = dummy.next;
+        dummy = reverse(dummy);
+        return dummy;
+    }
+}
