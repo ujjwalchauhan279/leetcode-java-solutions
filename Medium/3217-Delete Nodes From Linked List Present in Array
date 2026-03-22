@@ -1,0 +1,58 @@
+/* 
+
+Time Complexity: 
+
+Building HashSet → O(n)
+Traversing linked list → O(m)
+Total → O(n + m)
+
+Space Complexity: O(n) - hashset
+
+Approach:
+1. Store all values from nums into a HashSet for fast lookup
+2. Create a dummy node pointing to head (helps in deleting head safely)
+3. Initialize two pointers → prev = dummy, curr = head
+4. Traverse the linked list
+5. If curr.val exists in set → remove node by prev.next = curr.next
+6. Else → move prev to curr
+7. Move curr forward every time
+8. Return dummy.next (new head)
+
+
+*/
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int x : nums) set.add(x);
+        ListNode curr=head;
+        ListNode dummy = new ListNode(-1);
+        dummy.next=head;
+        ListNode prev=dummy;
+        while(curr!=null){
+            if(set.contains(curr.val)){
+                prev.next = curr.next;
+            }
+            else{
+                prev=curr;
+                
+            }
+            curr=curr.next;
+        }
+        return dummy.next;
+    }
+}
