@@ -1,0 +1,52 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Start from head.next (skip first 0)
+2. Initialize sum = 0
+3. Traverse the list
+4. If value ≠ 0 → add to sum
+5. If value == 0 →
+    Create new node with sum
+    Attach to result list
+    Reset sum = 0
+6. Return dummy.next
+
+*/
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+        ListNode curr = head.next;
+        ListNode dummy = new ListNode(-1);
+        ListNode t = dummy;
+        int sum=0;
+        while(curr!=null){
+            if(curr.val!=0){
+                sum+=curr.val;
+            }
+            else{
+                ListNode a = new ListNode(sum);
+                t.next = a;
+                t=t.next;
+                sum=0;
+            }
+            curr=curr.next;
+        }
+        return dummy.next;
+    }
+}
