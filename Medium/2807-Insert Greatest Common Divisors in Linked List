@@ -1,0 +1,54 @@
+/* 
+
+Time Complexity: 
+
+  Traversing list → O(n)
+  GCD for each pair → O(log(min(a, b)))
+  Total → O(n log V) (V = max value in nodes)
+
+Space Complexity: O(1)
+Approach:
+1. Traverse the linked list using curr pointer
+2. For every pair of adjacent nodes → compute GCD of their values
+3. Create a new node with this GCD
+4. Insert this node between the two nodes
+5. Move curr two steps forward (skip inserted node)
+6. Continue till end of list
+7. Return head
+
+*/
+
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int gcd(int a , int b){
+        if(a==0) return b;
+        return gcd(b%a , a);
+    }
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        if(head.next==null) return head;
+        ListNode curr = head;
+        
+        while(curr.next!=null){
+            int ans = gcd(curr.val , curr.next.val);
+            ListNode a = new ListNode(ans);
+            a.next = curr.next;
+            curr.next = a;
+            curr=curr.next.next;
+        }
+        return head;
+    }
+}
