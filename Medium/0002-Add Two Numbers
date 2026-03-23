@@ -1,0 +1,80 @@
+/* 
+
+Time Complexity: 
+
+ let length of l1 = n and l2 = m
+
+    so, O(max(n,m))
+
+Space Complexity: O(max(n,m))
+Approach:
+1. Initialize two pointers for both lists and a carry = 0
+2. Create a dummy node to build result list
+3. Traverse both lists simultaneously
+4. Add values of both nodes + carry
+5. Create new node with sum % 10
+6. Update carry = sum / 10
+7. Move both pointers forward
+8. If one list ends → continue with remaining list
+9. After traversal, if carry remains → add new node
+10. Return dummy.next
+
+*/
+
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode temp1=l1;
+        ListNode temp2=l2;
+        int carry=0;
+        ListNode dummy = new ListNode(-1);
+        ListNode t=dummy;
+        while(temp1!=null && temp2!=null){
+            int sum = temp1.val+temp2.val+carry;
+            ListNode a = new ListNode(sum%10);
+            t.next=a;
+            carry = sum/10;
+            t=t.next;
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+
+        while(temp1!=null){
+            int sum = temp1.val+carry;
+            ListNode a = new ListNode(sum%10);
+            t.next=a;
+            carry = sum/10;
+            t=t.next;
+            temp1=temp1.next;
+        }
+
+        while(temp2!=null){
+            int sum = temp2.val+carry;
+            ListNode a = new ListNode(sum%10);
+            t.next=a;
+            carry = sum/10;
+            t=t.next;
+            temp2=temp2.next;
+        }
+
+        if(carry==1){
+            ListNode a = new ListNode(1);
+            t.next=a;
+        }
+        return dummy.next;
+    }
+}
