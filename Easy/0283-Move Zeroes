@@ -1,0 +1,30 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Initialize pointer curr = 0 (position to place next non-zero)
+2. Traverse the array
+3. If current element is non-zero:
+4. Swap it with element at curr
+5. Increment curr
+6. Continue till end
+
+*/
+
+
+
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int curr=0;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]!=0){
+                int temp = nums[i];
+                nums[i] = nums[curr];
+                nums[curr] = temp;
+                curr++;
+            }
+        }
+    }
+}
