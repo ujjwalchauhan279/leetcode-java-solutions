@@ -1,0 +1,35 @@
+/* 
+
+Time Complexity: O(2*k)
+Space Complexity: O(1)
+Approach:
+1. Take first k elements from left and calculate sum
+2. Store it as maxsum
+3. Iterate from k-1 to 0
+4. In each step:
+    Remove one element from left part
+    Add one element from right end
+    Update maxsum
+5. Return maxsum
+
+*/
+
+
+
+
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int l=0;
+        int r=cardPoints.length-1;
+        int sum=0;
+        for(int i=l; i<=k-1; i++) sum+=cardPoints[i];
+        int maxsum=sum;
+        for(int i=k-1; i>=0; i--){
+            sum-=cardPoints[i];
+            sum+=cardPoints[r];
+            r--;
+            maxsum=(int)Math.max(maxsum, sum);
+        }
+        return maxsum;
+    }
+}
