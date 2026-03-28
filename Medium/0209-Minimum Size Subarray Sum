@@ -1,0 +1,45 @@
+/* 
+
+Time Complexity: ~O(n)
+
+   - O(n+n)
+   - O(2n)
+   - ~O(n)
+
+Space Complexity: O(1)
+Approach:
+1. Initialize two pointers l = 0, r = 0
+2. Maintain a running sum of current window
+3. Traverse array using r
+4. Add nums[r] to sum
+5. While sum ≥ target:
+6. Update minlen = min(minlen, r - l + 1)
+7. Remove nums[l] from sum and increment l
+8. Move r++ and repeat
+9. If no valid subarray → return 0
+
+*/
+
+
+
+
+
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int l=0;
+        int r=0;
+        int sum=nums[0];
+        int minlen=Integer.MAX_VALUE;
+        if(sum>=target) minlen=1;
+        while(r<nums.length-1){
+            r++;
+            sum+=nums[r];
+            while(sum>=target){
+                minlen = (int)Math.min(minlen, r-l+1);
+                sum-=nums[l];
+                l++;
+            }
+        }
+        return minlen==Integer.MAX_VALUE?0:minlen;
+    }
+}
