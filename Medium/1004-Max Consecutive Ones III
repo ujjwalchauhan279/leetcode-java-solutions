@@ -1,0 +1,36 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Initialize two pointers l = 0, r = 0
+2. Maintain a variable zeroes = 0
+3. Traverse the array using r
+4. If nums[r] == 0 → increment zeroes
+5. If zeroes > k → shrink window from left:
+6. If nums[l] == 0 → decrement zeroes
+7. Move l++
+8. Update maxlen = max(maxlen, r - l + 1)
+9. Move r++
+10. Return maxlen
+
+*/
+
+
+
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int l=0,r=0,maxlen=0,zeroes=0;
+        while(r<nums.length){
+            if(nums[r]==0) zeroes++;
+            if(zeroes>k){
+                if(nums[l]==0) zeroes--;
+                l++;
+            }
+            if(zeroes<=k) maxlen = (int)Math.max(maxlen, r-l+1);
+            r++;
+        }
+        return maxlen;
+    }
+}
