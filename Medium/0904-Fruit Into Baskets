@@ -1,0 +1,40 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Initialize two pointers l = 0, r = 0
+2. Use a HashMap to store frequency of fruits in current window
+3. Traverse array using r
+4. Add fruits[r] to map using getOrDefault
+5. If map size > 2 → shrink window from left:
+6. Decrease count of fruits[l]
+7. If its count becomes 0 → remove from map
+8. Move l++
+9. Update maxlen = max(maxlen, r - l + 1)
+10. Move r++
+11. Return maxlen
+
+*/
+
+
+
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int l=0;
+        int r=0;
+        int maxlen=0;
+        HashMap <Integer,Integer> map = new HashMap<>();
+        while(r<fruits.length){
+            map.put(fruits[r],map.getOrDefault(fruits[r], 0)+1);
+            if(map.size()>2){
+                map.put(fruits[l],map.get(fruits[l]) - 1);
+                if(map.get(fruits[l])==0) map.remove(fruits[l]);
+                l++;
+            }
+            if(map.size()<=2) maxlen=(int) Math.max(maxlen, r-l+1);
+            r++;
+        }
+        return maxlen;
+    }
+}
