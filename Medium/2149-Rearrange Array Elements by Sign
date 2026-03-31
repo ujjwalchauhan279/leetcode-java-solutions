@@ -1,0 +1,40 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Create a new array ans of same size
+2. Initialize two pointers:
+    pos = 0 (for positive numbers at even indices)
+    neg = 1 (for negative numbers at odd indices)
+3. Traverse the input array
+4. If element is positive → place it at ans[pos]
+5. Increment pos by 2
+6. If element is negative → place it at ans[neg]
+7. Increment neg by 2
+8. Return the result array
+
+*/
+
+
+
+
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int ans[] = new int[nums.length];
+        int pos=0;
+        int neg=1;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]>0){
+                ans[pos]=nums[i];
+                pos+=2;
+            }
+            else{
+                ans[neg]=nums[i];
+                neg+=2;
+            }
+        }
+        return ans;
+    }
+}
