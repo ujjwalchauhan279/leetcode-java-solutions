@@ -1,0 +1,40 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Handle edge case: if k <= 1 → return 0
+2. Initialize pointers l = 0, r = 0 and product = 1
+3. Traverse array using r
+4. Multiply product *= nums[r]
+5. While product ≥ k:
+6. Divide product by nums[l] and move l++
+7. Count valid subarrays ending at r → add (r - l + 1)
+8. Move r++
+9. Return total count
+
+*/
+
+
+
+
+
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        if(k<=1) return 0;
+        int l=0;
+        int r=0;
+        int count=0;
+        int product=1;
+        while(r<nums.length){
+            product*=nums[r];
+            while(product>=k && l<nums.length){
+                product/=nums[l];
+                l++;
+            }
+            count+=(r-l+1);
+            r++;
+        }
+        return count;
+    }
+}
