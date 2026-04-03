@@ -1,0 +1,42 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Create a HashMap (or Set) to track visited characters
+2. Traverse the string from left to right
+3. For each character:
+4. If it already exists in map/set → return that character
+5. Else add it to map/set
+6. If no repeated character found → return default value
+
+*/
+
+
+METHOD - 1 : USING HASHMAP
+
+
+class Solution {
+    public char repeatedCharacter(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i)))
+                return s.charAt(i);
+            map.put(s.charAt(i), 1);
+        }
+        return 'a';
+    }
+}
+
+METHOD - 2 : USING HASHSET
+
+class Solution {
+    public char repeatedCharacter(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for(int i=0; i<s.length(); i++){
+            if(set.contains(s.charAt(i))) return s.charAt(i);
+            set.add(s.charAt(i));
+        }
+        return 'a';
+    }
+}
