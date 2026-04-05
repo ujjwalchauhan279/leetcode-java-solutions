@@ -1,0 +1,69 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Create a deep copy of the list (only next pointers)
+2. Insert copied nodes in between original nodes (interleave)
+3. For each original node, set random of copied node:
+4. copy.random = original.random.next
+5. Separate the two lists (restore original + extract copy)
+6. Return head of copied list
+
+*/
+
+
+
+
+
+
+
+class Solution {
+    public Node copyRandomList(Node head1) {
+        if(head1==null) return null;
+        Node head2 = new Node(head1.val);
+        Node temp1 = head1.next;
+        Node t = head2;
+
+        //deepcopy of singly linklist
+        while(temp1!=null){
+            Node a = new Node(temp1.val);
+            t.next = a;
+            temp1=temp1.next;
+            t=t.next;
+        }
+
+        //alternatively connect both linklist with the help of dummy 
+        temp1 = head1;
+        Node temp2 = head2;
+        t = null;
+        while(temp1!=null){
+            t = temp1.next;
+            temp1.next = temp2;
+            temp2=temp2.next;
+            temp1.next.next=t;
+            temp1 = t;
+        }
+        
+        //connect random in head2 linklist using head1 linklist
+        temp1=head1;
+        while(temp1!=null){
+            if(temp1.random==null) temp1.next.random=null;
+            else temp1.next.random = temp1.random.next;
+            temp1=temp1.next.next;
+        }
+
+        //disjoint head2 and return it
+        temp1=head1;
+        temp2=head2;
+        while(temp1!=null && temp1.next!=null){
+            temp1.next = temp2.next;
+            temp1=temp1.next;
+            if(temp1!=null){
+                temp2.next = temp1.next;
+                temp2=temp2.next;
+            }
+        }
+        return head2;
+    }
+}
