@@ -1,0 +1,74 @@
+Time Complexity:
+
+Let n = number of nodes in linked list
+
+    Detecting cycle (slow & fast pointers) → O(n)
+    Finding start of cycle → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    No extra space used (only pointers)
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize two pointers:
+   - slow → moves 1 step
+   - fast → moves 2 steps
+
+2. Traverse the list:
+   - Move slow by 1 and fast by 2
+   - If they meet → cycle exists
+
+3. If fast reaches null:
+   - No cycle → return null
+
+4. If cycle is detected:
+   - Move fast pointer to head
+
+5. Now move both slow and fast one step at a time:
+   - The point where they meet again is the start of the cycle
+
+6. Return that node
+
+
+
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast) break;
+        }
+        if(fast==null || fast.next==null) return null;
+        fast=head;
+        while(fast!=slow){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
+}
