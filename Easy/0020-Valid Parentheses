@@ -1,0 +1,61 @@
+Time Complexity:
+
+Let n = length of string
+
+    Single traversal of string → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores at most n characters
+
+Overall: O(n)
+
+
+Approach:
+
+1. If length of string is odd:
+   - Return false (cannot form valid pairs)
+
+2. Create a stack to store opening brackets
+
+3. Traverse the string:
+   - If current character is opening bracket:
+     → push it into stack
+
+   - Else (closing bracket):
+     → If stack is empty → return false
+     → Check top of stack:
+         - If matching pair → pop
+         - Else → return false
+
+4. After traversal:
+   - If stack is empty → valid
+   - Else → invalid
+
+5. Return result
+
+
+
+
+class Solution {
+    public boolean isValid(String s) {
+        if((s.length()%2)!=0) return false;
+        Stack<Character> st = new Stack<>();
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i)=='(' ||s.charAt(i)=='['||s.charAt(i)=='{'){
+                st.push(s.charAt(i));
+            }
+            else{
+                if(st.size()==0) return false;
+                if((st.peek()=='(' && s.charAt(i)==')')||
+                    (st.peek()=='{' && s.charAt(i)=='}') ||
+                    (st.peek()=='[' && s.charAt(i)==']')) st.pop();
+                else return false;
+            }
+        }
+        return (st.size()==0);
+    }
+}
