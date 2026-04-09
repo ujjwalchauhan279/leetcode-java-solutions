@@ -1,0 +1,77 @@
+Time Complexity:
+
+Let n = number of operations
+
+    Single traversal of operations → O(n)
+    Final summation of stack → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores up to n scores
+
+Overall: O(n)
+
+
+Approach:
+
+1. Create a stack to store valid scores
+
+2. Traverse each operation in array:
+
+   - If operation is "C":
+     → Remove last valid score (pop)
+
+   - If operation is "D":
+     → Push double of last score (2 * top)
+
+   - If operation is "+":
+     → Pop top element temporarily
+     → Sum it with new top
+     → Push back popped value
+     → Push the computed sum
+
+   - Else (number):
+     → Convert string to integer
+     → Push into stack
+
+3. After processing all operations:
+   - Sum all elements in stack
+
+4. Return total sum
+
+
+
+
+
+
+class Solution {
+    public int calPoints(String[] operations) {
+        Stack<Integer> st = new Stack<>();
+        for(String ele: operations){
+            if(ele.equals("C")){
+                st.pop();
+            }
+            else if(ele.equals("D")){
+                st.push(2*st.peek());
+            }
+            else if(ele.equals("+")){
+                int popped = st.pop();
+                int sum = popped + st.peek();
+                st.push(popped);
+                st.push(sum);
+            }
+            else{
+                int num = Integer.parseInt(ele);
+                st.push(num);
+            }
+        }
+        int sum=0;
+        while(st.size()!=0){
+            sum+=st.pop();
+        }
+        return sum;
+    }
+}
