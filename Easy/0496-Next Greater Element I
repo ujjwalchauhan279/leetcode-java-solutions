@@ -1,0 +1,61 @@
+Time Complexity:
+
+Let n = size of nums1  
+Let m = size of nums2
+
+    Building map → O(m)
+    For each element in nums1:
+        scan nums2 → O(m)
+
+Overall: O(n * m)
+
+
+Space Complexity:
+
+    HashMap stores indices of nums2 → O(m)
+
+Overall: O(m)
+
+
+Approach:
+
+1. Create a HashMap:
+   - Store element → index mapping of nums2
+
+2. Traverse nums1:
+   - For each element, find its index in nums2 using map
+
+3. Start searching to the right of that index:
+   - Move forward until you find element greater than current
+
+4. If found:
+   - Store that value in nums1
+
+5. If not found:
+   - Store -1
+
+6. Return modified nums1 as result
+
+
+
+
+
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums2.length; i++) {
+            map.put(nums2[i], i);
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            int j = map.get(nums1[i]) + 1;
+            while (j < nums2.length && nums2[j] < nums1[i])
+                j++;
+            if (j == nums2.length)
+                nums1[i] = -1;
+            else
+                nums1[i] = nums2[j];
+        }
+        return nums1;
+    }
+}
