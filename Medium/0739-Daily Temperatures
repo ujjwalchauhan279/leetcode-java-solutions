@@ -1,0 +1,56 @@
+Time Complexity:
+
+Let n = number of days
+
+    Each index is pushed and popped at most once → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores indices → O(n)
+    Result array → O(n)
+
+Overall: O(n)
+
+
+Approach:
+
+1. Create a stack to store indices of days
+   - Stack will maintain decreasing temperatures
+
+2. Traverse array from right to left:
+
+   - While stack is not empty and current temperature ≥ temperature at stack top:
+     → pop indices (not useful for next warmer day)
+
+3. After popping:
+   - If stack is empty → no warmer day → result[i] = 0
+   - Else → result[i] = (index of next warmer day - i)
+
+4. Push current index into stack
+
+5. Continue for all elements
+
+6. Return result array
+
+
+
+
+
+class Solution {
+    public int[] dailyTemperatures(int[] t) {
+        Stack<Integer> st = new Stack<>();
+        int result[] = new int[t.length];
+        for(int i=t.length-1; i>=0; i--){
+            while(st.size()>0 && t[i] >= t[st.peek()]) st.pop();
+
+            if(st.size()==0) result[i]=0;
+            else result[i]=st.peek()-i;
+
+            st.push(i);
+        }
+        return result;
+    }
+}
