@@ -1,0 +1,42 @@
+Time Complexity:
+
+Let n = size of array
+
+    Single traversal → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    No extra data structures used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize minDis = ∞ (Integer.MAX_VALUE)
+
+2. Traverse the array:
+
+   - If nums[i] == target:
+     → Compute distance = |i - start|
+     → Update minDis = min(minDis, distance)
+
+3. After traversal:
+   - Return minDis
+
+
+
+
+
+class Solution {
+    public int getMinDistance(int[] nums, int target, int start) {
+        int minDis=Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i]==target) minDis = Math.min(minDis, (Math.abs(i-start)));
+        }
+        return minDis;
+    }
+}
