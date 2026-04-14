@@ -1,0 +1,72 @@
+Time Complexity:
+
+Let n = number of people
+
+    Each element is pushed and popped at most once → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores heights → O(n)
+
+Overall: O(n)
+
+
+Approach:
+
+1. Create a stack to store heights of people on the right
+
+2. Start from rightmost person:
+   - Last person sees 0 people
+
+3. Traverse from right to left:
+
+   - Initialize count = 0
+
+   - While stack is not empty and current height > stack top:
+     → Pop smaller heights (they are fully visible)
+     → Increment count
+
+4. After popping:
+   - If stack is empty → no taller person ahead → visible = count
+   - Else → one taller person is also visible → visible = count + 1
+
+5. Store result in same array
+
+6. Push current height into stack
+
+7. Continue for all elements
+
+8. Return result array
+
+
+
+
+
+
+
+
+class Solution {
+    public int[] canSeePersonsCount(int[] h) {
+        Stack<Integer> st = new Stack<>();
+        int n=h.length;
+        st.push(h[n-1]);
+        h[n-1]=0;
+        for(int i=n-2; i>=0; i--){
+            int count = 0;
+            int curr = h[i];
+            while(st.size()>0 && h[i]>st.peek()){
+                st.pop();
+                count++;
+            }
+
+            if(st.size()==0) h[i] = count;
+            else h[i] = count+1;
+
+            st.push(curr);
+        }
+        return h;
+    }
+}
