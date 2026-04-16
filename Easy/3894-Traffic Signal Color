@@ -1,0 +1,40 @@
+Time Complexity:
+
+    Constant number of checks → O(1)
+
+Overall: O(1)
+
+
+Space Complexity:
+
+    No extra space used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Check if timer == 0:
+   - Return "Green"
+
+2. Else if timer == 30:
+   - Return "Orange"
+
+3. Else if timer is in range (30, 90]:
+   - Return "Red"
+
+4. If none of the above conditions match:
+   - Return "Invalid"
+
+
+
+
+
+class Solution {
+    public String trafficSignal(int timer) {
+        if(timer==0) return "Green";
+        else if(timer==30) return "Orange";
+        else if(30 < timer && timer <= 90) return "Red";
+        return "Invalid";
+    }
+}
