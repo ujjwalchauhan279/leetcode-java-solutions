@@ -1,0 +1,49 @@
+Time Complexity:
+
+Let n = size of array  
+Let d = number of digits in each number
+
+    Traverse each number → O(n)
+    Extract digits → O(d)
+
+Overall: O(n * d)
+
+
+Space Complexity:
+
+    No extra space used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize count = 0
+
+2. Traverse each element in array:
+
+   - While number > 0:
+     → Extract last digit using (num % 10)
+     → If it equals given digit → increment count
+     → Remove last digit (num = num / 10)
+
+3. Repeat for all elements
+
+4. Return total count
+
+
+
+
+
+class Solution {
+    public int countDigitOccurrences(int[] nums, int digit) {
+        int count = 0;
+        for(int ele: nums){
+            while(ele>0){
+                if(digit == ele%10) count++;
+                ele/=10;
+            }
+        }
+        return count;
+    }
+}
