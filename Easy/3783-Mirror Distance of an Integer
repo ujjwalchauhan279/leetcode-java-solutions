@@ -1,0 +1,50 @@
+Time Complexity:
+
+Let d = number of digits in n
+
+    Reversing digits → O(d)
+
+Overall: O(d)
+
+
+Space Complexity:
+
+    No extra space used (only variables)
+
+Overall: O(1)
+
+
+Approach:
+
+1. Store original number in variable n
+
+2. Initialize:
+   - x = n (for processing)
+   - rev = 0 (to store reversed number)
+
+3. Reverse the number:
+   - While x != 0:
+     → Extract last digit (x % 10)
+     → Append to rev → rev = rev * 10 + digit
+     → Remove last digit (x = x / 10)
+
+4. Compute absolute difference:
+   - result = |n - rev|
+
+5. Return result
+
+
+
+
+
+class Solution {
+    public int mirrorDistance(int n) {
+        int x = n;
+        int rev = 0;
+        while(x!=0){
+            rev = rev*10 + x%10;
+            x/=10;
+        }
+        return Math.abs(n - rev);
+    }
+}
