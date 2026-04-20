@@ -1,0 +1,56 @@
+Time Complexity:
+
+Let n = length of string
+
+    Single traversal → O(n)
+    Building result → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores characters → O(n)
+    StringBuilder → O(n)
+
+Overall: O(n)
+
+
+Approach:
+
+1. Create a stack to store characters
+
+2. Traverse the string:
+
+   - If current character is '*':
+     → Remove last character (pop from stack)
+
+   - Else:
+     → Push character into stack
+
+3. After traversal:
+   - Pop all characters from stack into StringBuilder
+
+4. Reverse the result (since stack is LIFO)
+
+5. Return final string
+
+
+
+
+class Solution {
+    public String removeStars(String s) {
+        Stack<Character> st = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i)=='*') st.pop();
+            else st.push(s.charAt(i));
+        }
+        while(st.size()>0){
+            sb.append(st.pop());
+        }
+        sb.reverse();
+
+        return sb.toString();
+    }
+}
