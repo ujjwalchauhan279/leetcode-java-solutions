@@ -1,0 +1,47 @@
+Time Complexity:
+
+Let n = size of array
+
+    Nested loops → O(n²)
+
+Overall: O(n²)
+
+
+Space Complexity:
+
+    No extra space used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize maxDis = minimum value
+
+2. Traverse array using two loops:
+
+   - Outer loop (i from 0 to n-2)
+   - Inner loop (j from i+1 to n-1)
+
+3. For each pair (i, j):
+   - If colors[i] != colors[j]:
+     → Update maxDis = max(maxDis, j - i)
+
+4. After checking all pairs:
+   - Return maxDis
+
+
+
+
+
+class Solution {
+    public int maxDistance(int[] colors) {
+        int maxDis = Integer.MIN_VALUE;
+        for(int i=0; i<colors.length-1; i++){
+            for(int j=i+1; j<colors.length; j++){
+                if(colors[i]!=colors[j]) maxDis = Math.max(maxDis, j-i);
+            }
+        }
+        return maxDis;
+    }
+}
