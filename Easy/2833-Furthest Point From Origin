@@ -1,0 +1,57 @@
+Time Complexity:
+
+Let n = length of moves string
+
+    Single traversal of string → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Only constant variables used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Count occurrences of:
+   - 'L' → left moves
+   - 'R' → right moves
+   - '_' → flexible moves
+
+2. To maximize distance:
+   - Assign all '_' moves to the side having more moves
+   - This increases distance from origin as much as possible
+
+3. If L >= R:
+   - Treat all '_' as 'L'
+   - Distance = (L + space) - R
+
+4. Otherwise:
+   - Treat all '_' as 'R'
+   - Distance = (R + space) - L
+
+5. Return maximum possible distance
+
+
+
+
+
+
+class Solution {
+    public int furthestDistanceFromOrigin(String moves) {
+        int L=0;
+        int R=0;
+        int space=0;
+        for(int i=0; i<moves.length(); i++){
+            char s = moves.charAt(i);
+            if(s=='L') L++;
+            else if(s=='R') R++;
+            else space++;
+        }
+        if(L>=R) return (L+space)-R;
+        return (R+space)-L;
+    }
+}
