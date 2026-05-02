@@ -1,0 +1,52 @@
+Time Complexity:
+
+Let n = size of array
+
+    Outer loop → O(n)
+    Inner loop → O(n)
+
+Overall: O(n²)
+
+
+Space Complexity:
+
+    In-place sorting (no extra space)
+
+Overall: O(1)
+
+
+Approach:
+
+1. Traverse array using index i from 0 to n-1
+
+2. Assume current index i as minimum
+
+3. Traverse remaining array (j = i+1 to n-1):
+   - Find index of smallest element
+
+4. Swap:
+   - nums[i] with nums[min]
+
+5. Repeat for all positions
+
+6. Array gets sorted in ascending order
+
+
+
+
+
+class Solution {
+    public void sortColors(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int min = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[min] > nums[j]) {
+                    min = j;
+                }
+            }
+            int temp = nums[min];
+            nums[min] = nums[i];
+            nums[i] = temp;
+        }
+    }
+}
