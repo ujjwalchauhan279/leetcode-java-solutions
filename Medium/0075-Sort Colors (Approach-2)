@@ -1,0 +1,65 @@
+Time Complexity:
+
+Let n = size of array
+
+    Counting occurrences → O(n)
+    Overwriting array → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Only constant variables used (count0, count1)
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize counters:
+   - count0 = number of 0’s
+   - count1 = number of 1’s
+
+2. Traverse array:
+   - Count occurrences of 0 and 1
+   - Remaining elements are 2’s
+
+3. Overwrite array:
+
+   - Fill first count0 positions with 0
+   - Fill next count1 positions with 1
+   - Fill remaining positions with 2
+
+4. Return sorted array (in-place)
+
+
+
+
+
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int count0=0;
+        int count1=0;
+        for(int ele: nums){
+            if(ele==0) count0++;
+            if(ele==1) count1++;
+        }
+        int i=0;
+        while(i<nums.length && count0!=0){
+            nums[i]=0;
+            count0--;
+            i++;
+        }
+        while(i<nums.length && count1!=0){
+            nums[i]=1;
+            count1--;
+            i++;
+        }
+        while(i<nums.length){
+            nums[i]=2;
+            i++;
+        }
+    }
+}
