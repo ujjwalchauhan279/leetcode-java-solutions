@@ -1,0 +1,52 @@
+Time Complexity:
+
+Let n = length of string s
+
+    Traversing string s → O(n)
+    Traversing string t → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Only constant variables used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize:
+   - asciiSumS = 0
+   - asciiSumT = 0
+
+2. Traverse string s:
+   - Add ASCII value of each character to asciiSumS
+
+3. Traverse string t:
+   - Add ASCII value of each character to asciiSumT
+
+4. Compute difference:
+   - asciiSumT - asciiSumS
+
+5. The difference represents ASCII value of extra character
+
+6. Typecast result to char and return it
+
+
+
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int asciiSumS= 0;
+        int asciiSumT= 0;
+        for(int i=0; i<s.length(); i++){
+            asciiSumS += s.charAt(i);
+        }
+        for(int i=0; i<t.length(); i++){
+            asciiSumT += t.charAt(i);
+        }
+        return (char)(asciiSumT - asciiSumS);
+    }
+}
