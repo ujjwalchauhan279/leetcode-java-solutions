@@ -1,0 +1,49 @@
+Time Complexity:
+
+Let n = length of string s
+
+    Traversing string s → O(n)
+    Traversing string t → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    No extra data structures used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize ans = 0
+
+2. Traverse string s:
+   - XOR each character with ans
+
+3. Traverse string t:
+   - XOR each character with ans
+
+4. Same characters cancel out because:
+   - a ^ a = 0
+
+5. Remaining value in ans is the extra character
+
+6. Typecast ans to char and return it
+
+
+
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int ans = 0;
+        for(int i=0; i<s.length(); i++){
+            ans ^= (s.charAt(i));
+        }
+        for(int i=0; i<t.length(); i++){
+            ans ^= (t.charAt(i));
+        }
+        return (char)ans;
+    }
+}
