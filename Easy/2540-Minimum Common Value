@@ -1,0 +1,54 @@
+Time Complexity:
+
+Let n = size of nums1
+Let m = size of nums2
+
+    Traverse both arrays once → O(n + m)
+
+Overall: O(n + m)
+
+
+Space Complexity:
+
+    No extra data structures used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize two pointers:
+   - i = 0 for nums1
+   - j = 0 for nums2
+
+2. Traverse both arrays simultaneously:
+
+   - If nums1[i] == nums2[j]:
+     → Common element found
+     → Return that value
+
+   - If nums1[i] < nums2[j]:
+     → Increment i
+
+   - Else:
+     → Increment j
+
+3. Continue until one array ends
+
+4. If no common element exists:
+   → Return -1
+
+
+
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        int i = 0;
+        int j = 0;
+        while(i<nums1.length && j<nums2.length){
+            if(nums1[i]==nums2[j]) return nums2[j];
+            if(nums1[i]<nums2[j]) i++;
+            else j++;
+        } 
+        return -1;
+    }
+}
