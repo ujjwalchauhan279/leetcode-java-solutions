@@ -1,0 +1,53 @@
+Time Complexity:
+
+Let n = size of array
+
+    Single traversal → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Only constant variables used
+
+Overall: O(1)
+
+
+Approach:
+
+1. Initialize flag = 0
+   - It stores count of order breaks
+
+2. Traverse array from index 0 to n-2:
+
+   - If nums[i] > nums[i+1]
+     → increment flag
+
+3. Analyze break count:
+
+   - If flag > 1:
+     → array cannot be sorted and rotated
+     → return false
+
+   - If flag == 1:
+     → check if first element ≥ last element
+     → return result
+
+   - If flag == 0:
+     → array is already sorted
+     → return true
+
+
+
+class Solution {
+    public boolean check(int[] nums) {
+        int flag=0;
+        for(int i=0; i<nums.length-1; i++){
+            if(nums[i]>nums[i+1]) flag++;
+        }
+        if(flag==1) return nums[0]>=nums[nums.length-1];
+        if(flag>1) return false;
+        return true;
+    }
+}
