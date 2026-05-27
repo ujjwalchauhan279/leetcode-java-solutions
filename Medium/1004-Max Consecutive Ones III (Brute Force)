@@ -1,0 +1,32 @@
+Time Complexity:
+O(n²)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Traverse each index as a starting point of a subarray.
+2. For every starting index, extend the subarray using another loop.
+3. Count the number of zeroes in the current subarray.
+4. If zeroes become greater than k, stop extending further.
+5. Otherwise, update the maximum length of the valid subarray.
+
+
+
+class Solution {
+    public int longestOnes(int[] arr, int k) {
+        int zeroes=0;
+        int maxLen=0;
+        for(int i=0; i<arr.length; i++){
+            zeroes=0;
+            for(int j=i; j<arr.length; j++){
+                if(arr[j]==0) zeroes++;
+                if(zeroes>k) break;
+                else{
+                    maxLen = Math.max(j-i+1, maxLen);
+                }
+            }
+        }
+        return maxLen;
+    }
+}
