@@ -1,0 +1,36 @@
+Problem Name:
+Sliding Window with Two Pointers
+
+Time Complexity:
+O(n+n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Maintain a sliding window using two pointers l and r.
+2. Expand the window by moving r and count the number of zeroes.
+3. If zeroes become greater than k, shrink the window from the left.
+4. While shrinking, decrease zero count whenever a zero leaves the window.
+5. Update the maximum length of the valid window at each step.
+
+
+
+class Solution {
+    public int longestOnes(int[] arr, int k) {
+        int l=0;
+        int r=0;
+        int zeroes=0;
+        int maxLen=0;
+        while(r<arr.length){
+            if(arr[r]==0) zeroes++;
+            while(zeroes>k){
+                if(arr[l]==0) zeroes--;
+                l++;
+            }
+            maxLen = Math.max(maxLen, r-l+1);
+            r++;
+        }
+        return maxLen;
+    }
+}
