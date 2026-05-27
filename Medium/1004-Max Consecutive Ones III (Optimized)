@@ -28,7 +28,9 @@ class Solution {
                 if(nums[l]==0) zeroes--;
                 l++;
             }
-            if(zeroes<=k) maxlen = (int)Math.max(maxlen, r-l+1);
+            else{
+                maxlen = (int)Math.max(maxlen, r-l+1);
+            }
             r++;
         }
         return maxlen;
