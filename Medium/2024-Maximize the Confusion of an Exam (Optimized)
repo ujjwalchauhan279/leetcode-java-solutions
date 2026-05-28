@@ -1,0 +1,38 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Use two pointers l = 0 and r = 0
+2. Maintain count of 'T' and 'F' inside the current window
+3. Expand the window by moving r
+4. If both T and F counts become greater than k, shrink the window from left
+5. While shrinking, decrease the corresponding character count
+6. Update maxLen using current valid window size
+7. Continue until r reaches the end of the string
+8. Return maxLen
+
+
+
+
+class Solution {
+    public int maxConsecutiveAnswers(String s, int k) {
+        int T = 0, F = 0;
+        int maxLen = 0;
+        int l=0, r=0;
+        while(r<s.length()){
+            if(s.charAt(r)=='T') T++;
+            else F++;
+            if(T>k && F>k){
+                if(s.charAt(l)=='T') T--;
+                else F--;
+                l++;
+            }
+            maxLen = Math.max(maxLen, r-l+1);
+            r++;
+        }
+        return maxLen;
+    }
+}
