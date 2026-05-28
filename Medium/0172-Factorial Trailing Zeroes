@@ -1,0 +1,25 @@
+Time Complexity:
+O(log n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Count how many multiples of 5 are present from 1 to n.
+2. Add n/5 to the answer since each multiple contributes at least one factor of 5.
+3. Divide n by 5 repeatedly to count extra factors contributed by powers like 25, 125, etc.
+4. Keep adding the quotient to the count until n becomes 0.
+5. Return the total count of trailing zeroes.
+
+
+
+class Solution {
+    public int trailingZeroes(int n) {
+        int count = 0;
+        while(n!=0){
+            count+=n/5;
+            n/=5;
+        }
+        return count;
+    }
+}
