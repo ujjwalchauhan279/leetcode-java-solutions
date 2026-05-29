@@ -1,0 +1,31 @@
+Time Complexity:
+d = number of digits in the largest number
+O(n × d)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Initialize minSum as Integer.MAX_VALUE
+2. Traverse each element of the array
+3. Calculate the sum of its digits using modulo and division
+4. Compare the digit sum with minSum
+5. Update minSum if a smaller digit sum is found
+6. After processing all elements, return minSum
+
+
+
+class Solution {
+    public int minElement(int[] nums) {
+        int minSum = Integer.MAX_VALUE;
+        for (int ele : nums) {
+            int sum = 0;
+            while (ele != 0) {
+                sum += ele % 10;
+                ele /= 10;
+            }
+            minSum = Math.min(minSum, sum);
+        }
+        return minSum;
+    }
+}
