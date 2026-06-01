@@ -1,6 +1,19 @@
-// Time Complexity: O(n^2)
-// Space Complexity: O(1)
-// Approach: Brute Force
+Time Complexity:
+O(n²)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Traverse the array using index i
+2. For each i, traverse the remaining elements using index j
+3. Check if nums[i] + nums[j] equals the target
+4. If a valid pair is found, store their indices in the result array
+5. Continue until the pair is found
+6. Return the result array
+
+
+
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int result[]=new int[2];
