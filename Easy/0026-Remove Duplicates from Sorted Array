@@ -1,0 +1,31 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Initialize curr = 0 to track the position of the last unique element
+2. Traverse the array from index 1
+3. Compare the current element with nums[curr]
+4. If they are different, increment curr
+5. Place the new unique element at index curr
+6. Continue until the end of the array
+7. Return curr + 1 as the count of unique elements
+
+
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int curr = 0;
+        for(int i=1; i<nums.length; i++){
+            if(nums[curr] != nums[i]){
+                curr++;
+                int temp = nums[curr];
+                nums[curr] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        return curr+1;
+    }
+}
