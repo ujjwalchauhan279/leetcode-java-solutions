@@ -1,0 +1,31 @@
+Time Complexity:
+O(n²)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Traverse each index as the starting point of a subarray
+2. Initialize sum = 0 for every starting index
+3. Extend the subarray using another loop
+4. Continuously add the current element to sum
+5. Update maxSum with the maximum subarray sum found so far
+6. Repeat for all possible starting indices
+7. Return maxSum
+
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int i=0; i<nums.length; i++){
+            sum = 0;
+            for(int j=i; j<nums.length; j++){
+                sum += nums[j];
+                maxSum = Math.max(maxSum, sum);
+            }
+        }
+        return maxSum;
+    }
+}
