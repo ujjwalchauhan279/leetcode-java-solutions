@@ -1,0 +1,26 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(n)
+
+Approach:
+1. Create a HashSet to store visited elements
+2. Traverse the array
+3. For each element, check if it already exists in the HashSet
+4. If it exists, return true
+5. Otherwise, add the element to the HashSet
+6. Continue until all elements are processed
+7. If no duplicate is found, return false
+
+
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int ele:nums){
+            if(set.contains(ele)) return true;
+            set.add(ele);
+        }
+        return false;
+    }
+}
