@@ -1,0 +1,27 @@
+Time Complexity:
+O(n log n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Sort the array in non-decreasing order
+2. Traverse the sorted array from index 0 to n-2
+3. Compare each element with its next element
+4. If two adjacent elements are equal, return true
+5. If no duplicate is found after traversal, return false
+
+
+
+import java.util.Arrays;
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+      Arrays.sort(nums);
+      for(int i=0;i<nums.length-1;i++){
+        if(nums[i]==nums[i+1]){
+            return true;
+        }
+      }
+      return false;
+    }
+}
