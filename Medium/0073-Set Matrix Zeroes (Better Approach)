@@ -1,0 +1,40 @@
+Time Complexity:
+O(m × n)
+
+Space Complexity:
+O(m + n)
+
+Approach:
+1. Create two HashSets to store row indices and column indices containing zeroes
+2. Traverse the entire matrix
+3. If a cell contains 0, store its row and column index in the respective HashSets
+4. Traverse the matrix again
+5. If the current row or column exists in the HashSets, set that cell to 0
+6. Continue until all cells are processed
+
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        HashSet<Integer> rowZero = new HashSet<>();
+        HashSet<Integer> colZero = new HashSet<>();
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(matrix[i][j] == 0){
+                    rowZero.add(i);
+                    colZero.add(j);
+                }
+            }
+        }
+        
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(rowZero.contains(i) || colZero.contains(j)){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
