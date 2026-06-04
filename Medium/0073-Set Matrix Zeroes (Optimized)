@@ -1,0 +1,68 @@
+Time Complexity:
+O(m × n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Check whether the first row and first column originally contain any zero
+2. Traverse the remaining matrix and use the first row and first column as markers
+3. If matrix[i][j] is 0, mark matrix[i][0] and matrix[0][j] as 0
+4. Traverse the matrix again (excluding first row and column)
+5. Set matrix[i][j] to 0 if its corresponding row or column marker is 0
+6. If the first row originally had a zero, set the entire first row to 0
+7. If the first column originally had a zero, set the entire first column to 0
+
+
+
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        //first record whether firstRow or firstCol have zero or not
+        boolean firstRowZero = false;
+        boolean firstColZero = false;
+        for(int i=0; i<m; i++){
+            if(matrix[i][0] == 0){
+                firstColZero = true;
+                break;
+            }
+        }
+        for(int j=0; j<n; j++){
+            if(matrix[0][j] == 0){
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        //record zero int firstRow and firstCol
+        for(int i=1; i<m; i++){
+            for(int j=1; j<n; j++){
+                if(matrix[i][j] == 0){
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+
+        //set Zero at recorded row and col
+        for(int i=1; i<m; i++){
+            for(int j=1; j<n; j++){
+                if(matrix[i][0]==0 || matrix[0][j]==0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        //Individually handle firstRow and firsCol
+        if(firstRowZero){
+            for(int j=0; j<n; j++) matrix[0][j] = 0;
+        }
+        if(firstColZero){
+            for(int i=0; i<m; i++) matrix[i][0] = 0;
+        }
+    }
+}
