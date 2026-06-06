@@ -1,0 +1,62 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Traverse the array from right to left and find the first index where nums[i] < nums[i + 1]
+2. If no such index exists, reverse the entire array as it is the last permutation
+3. Otherwise, traverse from the end and find the first element greater than nums[idx]
+4. Swap that element with nums[idx]
+5. Reverse the subarray from idx + 1 to the end
+6. The resulting array becomes the next lexicographically greater permutation
+
+
+
+
+
+
+
+
+class Solution {
+    public int[] reverse(int[] arr, int l, int r) {
+        while (l <= r) {
+            int temp = arr[l];
+            arr[l] = arr[r];
+            arr[r] = temp;
+            l++;
+            r--;
+        }
+        return arr;
+    }
+
+    public void nextPermutation(int[] nums) {
+        //find out peak point 
+        int n = nums.length;
+        int idx = -1;
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                idx = i;
+                break;
+            }
+        }
+
+        //if array is in decreasing order then return reverse of it for next permutation
+        if (idx == -1)
+            reverse(nums, 0, n-1);
+        else {
+            //find number just greater than arr[idx] and swap it
+            for (int i = n - 1; i >= 0; i--) {
+                if (nums[idx] < nums[i]) {
+                    int temp = nums[i];
+                    nums[i] = nums[idx];
+                    nums[idx] = temp;
+                    break;
+                }
+            }
+            //reverse the remaining to get smallest next permutation
+            reverse(nums, idx+1, n-1);
+        }
+    }
+}
