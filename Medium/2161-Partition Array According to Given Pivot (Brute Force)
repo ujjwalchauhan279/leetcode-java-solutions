@@ -1,0 +1,46 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(n)
+
+Approach:
+1. Create three separate lists for elements smaller than, equal to, and greater than the pivot
+2. Traverse the array once and place each element into its respective list
+3. Traverse the lesser list and copy its elements back into the array
+4. Append all elements from the equal list
+5. Append all elements from the greater list
+6. Return the modified array
+
+
+
+
+
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        ArrayList<Integer> lesser = new ArrayList<>();
+        ArrayList<Integer> equal = new ArrayList<>();
+        ArrayList<Integer> greater = new ArrayList<>();
+
+        for(int ele: nums){
+            if(ele < pivot) lesser.add(ele);
+            else if(ele == pivot) equal.add(ele);
+            else greater.add(ele);
+        }
+        int i=0;
+        for(int ele : lesser){
+            nums[i] = ele;
+            i++;
+        }
+        for(int ele : equal){
+            nums[i] = ele;
+            i++;
+        }
+        for(int ele : greater){
+            nums[i] = ele;
+            i++;
+        }
+
+        return nums;
+    }
+}
