@@ -1,0 +1,49 @@
+Time Complexity:
+O(n)
+
+Space Complexity:
+O(n)
+
+Approach:
+1. Traverse the array and count the number of elements smaller than and equal to the pivot
+2. Determine the starting indices for smaller, equal, and greater elements in the answer array
+3. Traverse the array again
+4. If the current element is smaller than the pivot, place it at index i and increment i
+5. If it is equal to the pivot, place it at index j and increment j
+6. Otherwise, place it at index k and increment k
+7. Return the constructed answer array
+
+
+
+
+
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int ans[] = new int[nums.length];
+        int lesserCount= 0;
+        int equalCount = 0;
+        for(int ele: nums){
+            if(ele == pivot) equalCount++;
+            if(ele < pivot) lesserCount++;
+        }
+
+        int i = 0; //lesser number ka starting index
+        int j = lesserCount; //equal number ka starting index
+        int k = lesserCount + equalCount; //greater number ka starting index
+        for(int ele: nums){
+            if(ele < pivot){
+                ans[i] = ele;
+                i++;
+            }
+            else if(ele == pivot){
+                ans[j] = ele;
+                j++;
+            }
+            else{
+                ans[k] = ele;
+                k++;
+            }
+        }
+        return ans;
+    }
+}
