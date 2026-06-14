@@ -1,0 +1,60 @@
+Time Complexity:
+O(n²)
+
+Space Complexity:
+O(1)
+
+Approach:
+1. Initialize four boundaries: top, bottom, left, and right
+2. Maintain a variable val starting from 1
+3. Fill the top row from left to right and increment top
+4. Fill the right column from top to bottom and decrement right
+5. Fill the bottom row from right to left and decrement bottom
+6. Fill the left column from bottom to top and increment left
+7. Continue the spiral traversal while the boundaries are valid
+8. Place values sequentially and increment val after every insertion
+9. Return the generated matrix
+
+
+
+
+
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int ans[][] = new int[n][n];
+        int top = 0;
+        int bottom = n-1;
+        int left = 0;
+        int right = n-1;
+        int val = 1;
+        while(top<=bottom && left<=right){
+            //left-->right
+            for(int j=left; j<=right; j++){
+                ans[top][j] = val;
+                val++;
+            }
+            top++;
+            //top-->bottom
+            for(int i=top; i<=bottom; i++){
+                ans[i][right] = val;
+                val++;
+            }
+            right--;
+            //right-->left
+            for(int j=right; j>=left; j--){
+                ans[bottom][j] = val;
+                val++;
+            }
+            bottom--;
+            //bottom-->top
+            for(int i=bottom; i>=top; i--){
+                ans[i][left] = val;
+                val++;
+            }
+            left++;
+
+        }
+        return ans;
+    }
+}
