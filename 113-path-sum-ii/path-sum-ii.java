@@ -6,17 +6,21 @@ class Solution {
             innerList = new ArrayList<>(innerList);
             innerList.add(root.val);
             targetSum -= root.val;
+            
             if(targetSum == 0){
                 list.add(innerList);
             }
+            
+            
         }
 
-        innerList = new ArrayList<>(innerList);
         innerList.add(root.val);
         targetSum -= root.val;
 
         helper(root.left, targetSum, innerList, list);
         helper(root.right, targetSum, innerList, list);
+
+        innerList.remove(innerList.size() - 1);
     }
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> list = new ArrayList<>();
