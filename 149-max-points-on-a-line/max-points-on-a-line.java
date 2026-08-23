@@ -1,23 +1,25 @@
 class Solution {
     public int maxPoints(int[][] points) {
+        HashMap<Double, Integer> map;
         int n = points.length;
         int maxCount = 1;
-        
+
         for(int i=0; i<n; i++){
-            for(int j=i+1; j<n; j++){
-                int count = 2;
-                int dy = (points[j][1] - points[i][1]);
-                int dx = (points[j][0] - points[i][0]);
+            map = new HashMap<>();
+            for(int j=0; j<n; j++){
 
-                for(int k=j+1; k<n; k++){
-                    int dy_ = (points[k][1] - points[i][1]);
-                    int dx_ = (points[k][0] - points[i][0]);
+                if(j==i) continue;
 
-                    if((dx * dy_) == (dx_ * dy)){
-                        count++;
-                    }
-                }
-                if(count > maxCount) maxCount = count;
+                int dy = points[j][1] - points[i][1];
+                int dx = points[j][0] - points[i][0];
+
+                double theta = Math.atan2(dy, dx);
+                map.put(theta, map.getOrDefault(theta, 0)+1);
+            }
+
+            for(double key: map.keySet()){
+                int freq = map.get(key) + 1;
+                if(freq > maxCount) maxCount = freq;
             }
         }
 
