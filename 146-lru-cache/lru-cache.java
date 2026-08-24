@@ -1,6 +1,8 @@
 class Pair{
     int key;
     int value;
+    Pair prev;
+    Pair next;
 
     Pair(int key, int value){
         this.key = key;
@@ -9,37 +11,60 @@ class Pair{
 }
 
 class LRUCache {
-    ArrayList<Pair> list = new ArrayList<>();
-    int n;
+    HashMap<Integer, Pair> map = new HashMap<>();
+    Pair head = new Pair(0, 0);
+    Pair tail = new Pair(0, 0);
+    int capacity;
     public LRUCache(int capacity) {
-        n = capacity;
+        this.capacity = capacity;
+
+        head.next = tail; 
+        tail.prev = head;
     }
     
     public int get(int key) {
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).key == key){
-                Pair remove = list.remove(i);
-                list.add(remove);
-                return remove.value;
-            }
-        }
-        return -1;
+        if(!map.containsKey(key)) return -1;
+
+        Pair node = map.get(key);
+
+        removeFromHead(node);
+        addAtTail(node);
+
+        return node.value;
     }
     
     public void put(int key, int value) {
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).key == key){
-                Pair remove = list.remove(i);
-                remove.value = value;
-                list.add(remove);
-                return;
+        if(map.containsKey(key)){
+            Pair node = map.get(key);
+            node.value = value;
+            removeFromHead(node);
+            addAtTail(node);
+        }
+        else{
+            Pair node = new Pair(key, value);
+            map.put(key, node);
+            addAtTail(node);
+
+            if(map.size() > capacity){
+                Pair remove = head.next;
+                removeFromHead(remove);
+                map.remove(remove.key);
             }
         }
-        if(list.size() >= n){
-            list.remove(0);
-        }
-        list.add(new Pair(key, value));
     }
+    void removeFromHead(Pair node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+
+    }
+    void addAtTail(Pair node){
+        node.prev = tail.prev;
+        node.next = tail;
+
+        tail.prev.next = node;
+        tail.prev = node;
+    } 
+
 }
 
 /**
