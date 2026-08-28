@@ -3,14 +3,25 @@ class Solution {
         int m = grid.length;
         int n = grid[0].length;
         int count = 0;
-
+        
         for(int i=0; i<m; i++){
-            for(int j=n-1; j>=0; j--){
-                if(grid[i][j] < 0) count++;
-                else break;
-            }
-        }
+            int low = 0;
+            int high = n-1;
 
+            while(low <= high){
+                int mid = low + (high - low)/2;
+
+                if(grid[i][mid] < 0){
+                    high = mid-1;
+                }
+                else{
+                    low = mid+1;
+                }
+            }
+
+            count += n-low;
+        }
         return count;
+        
     }
 }
