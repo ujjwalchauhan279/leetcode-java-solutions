@@ -1,24 +1,23 @@
 class Solution {
     static int i;
-    static ArrayList<Integer> arr;
-    public void inorder(TreeNode root){
+    public void inorder(TreeNode root, ArrayList<Integer> arr){
         if(root == null) return;
 
-        inorder(root.right);
+        inorder(root.right, arr);
         arr.add(root.val);
-        inorder(root.left);
+        inorder(root.left, arr);
     }
-    public void modify(TreeNode root){
+    public void modify(TreeNode root, ArrayList<Integer> arr){
         if(root == null) return;
 
-        modify(root.right);
+        modify(root.right, arr);
         root.val = arr.get(i++);
-        modify(root.left);
+        modify(root.left, arr);
     }
     public TreeNode bstToGst(TreeNode root) {
-        arr = new ArrayList<>();
+        ArrayList<Integer> arr = new ArrayList<>();
 
-        inorder(root);
+        inorder(root, arr);
 
         for(int j=1; j<arr.size(); j++){
             int sum = arr.get(j) + arr.get(j-1);
@@ -26,7 +25,7 @@ class Solution {
         }
 
         i = 0;
-        modify(root);
+        modify(root, arr);
 
         return root;
     }
