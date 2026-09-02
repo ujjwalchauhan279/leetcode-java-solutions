@@ -1,5 +1,6 @@
 class Solution {
     static int i;
+    static int sum;
     public void inorder(TreeNode root, ArrayList<Integer> arr){
         if(root == null) return;
 
@@ -11,7 +12,8 @@ class Solution {
         if(root == null) return;
 
         modify(root.right, arr);
-        root.val = arr.get(i++);
+        sum += arr.get(i++);
+        root.val = sum;
         modify(root.left, arr);
     }
     public TreeNode convertBST(TreeNode root) {
@@ -19,10 +21,7 @@ class Solution {
 
         inorder(root, arr);
 
-        for(int j=1; j<arr.size(); j++){
-            int sum = arr.get(j) + arr.get(j-1);
-            arr.set(j, sum);
-        }
+        sum = 0;
 
         i=0;
         modify(root, arr);
