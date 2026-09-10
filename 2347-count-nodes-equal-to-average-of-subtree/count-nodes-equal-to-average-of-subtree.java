@@ -1,27 +1,30 @@
+class Pair{
+    int sum;
+    int count;
+    Pair(int sum, int count){
+        this.sum = sum;
+        this.count = count;
+    }
+}
+
 class Solution {
     static int ans;
-    public int sum(TreeNode root){
-        if(root == null) return 0;
-        return root.val + sum(root.left) + sum(root.right);
-    }
-    public int size(TreeNode root){
-        if(root == null) return 0;
-        return 1 + size(root.left) + size(root.right);
-    }
-    public void helper(TreeNode root){
-        if(root == null) return;
-        int s = sum(root);
-        int x = size(root);
+    public Pair helper(TreeNode root){
+        if(root == null) return new Pair(0, 0);
 
-        if(root.val == (s/x)) ans++;
+        Pair left = helper(root.left);
+        Pair right = helper(root.right);
 
-        helper(root.left);
-        helper(root.right);
+        int sum = root.val + left.sum + right.sum;
+        int count = 1 + left.count + right.count;
+
+        if(root.val == (sum/count)) ans++;
+
+        return new Pair(sum, count);
     }
     public int averageOfSubtree(TreeNode root) {
-        if(root == null) return 0;
-
         ans = 0;
+
         helper(root);
 
         return ans;
