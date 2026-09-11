@@ -1,6 +1,5 @@
 class Solution {
     public int totalNumbers(int[] digits) {
-        HashSet<Integer> set = new HashSet<>();
         int n = digits.length;
         int freq[] = new int[10]; 
         int count = 0;
