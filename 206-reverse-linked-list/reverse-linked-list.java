@@ -4,7 +4,8 @@ class Solution {
 
         ListNode x = head.next;
         head.next = prev;
-        return reverse(x, head, null);
+
+        return reverse(x, head, x);
     }
     public ListNode reverseList(ListNode head) {
         return reverse(head, null, null);
