@@ -1,40 +1,45 @@
 class Solution {
-    public int subarrayCount(int nums[], int mid){
-        int currSum = 0;
-        int count = 0;
-        for(int ele: nums){
-            currSum += ele;
-            if(currSum > mid){
-                count++;
-                currSum = ele;
-            }
-        }
-        count++;
-
-        return count;
-    }
-    public int splitArray(int[] nums, int k) {
-        int low = -1;
-        int high = 0;
-
-        for(int ele: nums){
-            if(low < ele) low = ele;
-            high += ele;
-        }
-
-        int ans = 0;
-        while(low <= high){
-            int mid = low + (high-low)/2;
-            int count = subarrayCount(nums, mid);
-            if(count <= k){
-                ans = mid;
-                high = mid - 1;
-            }
-            else{
-                low = mid + 1;
-            }
-        }
-
-        return ans;
+    public int ispossible(long page, int arr[]) {
+		int student = 1;
+		long  pageCount = 0;
+		
+		for (int i = 0; i<arr.length; i++) {
+			if (pageCount + arr[i] <= page) {
+				pageCount += arr[i];
+			}
+			else {
+				student++;
+				pageCount = arr[i];
+			}
+		}
+		
+		return student;
+	}
+    public int splitArray(int[] arr, int k) {
+        if (k > arr.length)
+			return - 1;
+		int max = Integer.MIN_VALUE;
+		long sum = 0;
+		for (int ele: arr) {
+			sum += ele;
+			max = Math.max(max, ele);
+		}
+		
+		long low = max;
+		long high = sum;
+		
+		long ans = -1;
+		
+		while (low <= high) {
+			long mid = low + (high - low)/2;
+			if(ispossible(mid, arr) > k){
+			    low = mid + 1;
+			}
+			else{
+			    ans = mid;
+			    high = mid - 1;
+			}
+		}
+		return (int)ans;
     }
 }
