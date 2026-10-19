@@ -3,9 +3,8 @@ class Solution {
         List<Integer> list = new ArrayList<>();
 
         for(int i=0; i<words.length; i++){
-            String s = words[i];
-            for(int j=0; j<s.length(); j++){
-                if(s.charAt(j) == x){
+            for(int j=0; j<words[i].length(); j++){
+                if(words[i].charAt(j) == x){
                     list.add(i);
                     break;
                 }
