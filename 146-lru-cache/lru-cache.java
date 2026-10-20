@@ -1,70 +1,30 @@
-class Pair{
-    int key;
-    int value;
-    Pair prev;
-    Pair next;
-
-    Pair(int key, int value){
-        this.key = key;
-        this.value = value;
-    }
-}
-
 class LRUCache {
-    HashMap<Integer, Pair> map = new HashMap<>();
-    Pair head = new Pair(0, 0);
-    Pair tail = new Pair(0, 0);
     int capacity;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    Deque<Integer> dq = new ArrayDeque<>();
     public LRUCache(int capacity) {
         this.capacity = capacity;
-
-        head.next = tail; 
-        tail.prev = head;
     }
     
     public int get(int key) {
         if(!map.containsKey(key)) return -1;
 
-        Pair node = map.get(key);
+        dq.remove(key);
+        dq.addLast(key);
 
-        removeFromHead(node);
-        addAtTail(node);
-
-        return node.value;
+        return map.get(key);
     }
     
     public void put(int key, int value) {
         if(map.containsKey(key)){
-            Pair node = map.get(key);
-            node.value = value;
-            removeFromHead(node);
-            addAtTail(node);
+            map.remove(key);
+            dq.remove(key);
         }
-        else{
-            Pair node = new Pair(key, value);
-            map.put(key, node);
-            addAtTail(node);
+        if(map.size() == capacity) map.remove(dq.removeFirst());
 
-            if(map.size() > capacity){
-                Pair remove = head.next;
-                removeFromHead(remove);
-                map.remove(remove.key);
-            }
-        }
+        map.put(key, value);
+        dq.addLast(key);
     }
-    void removeFromHead(Pair node){
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
-
-    }
-    void addAtTail(Pair node){
-        node.prev = tail.prev;
-        node.next = tail;
-
-        tail.prev.next = node;
-        tail.prev = node;
-    } 
-
 }
 
 /**
