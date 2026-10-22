@@ -1,54 +1,33 @@
-class Pair {
-    TreeNode r;
-    int level;
-
-    Pair(TreeNode r, int level) {
-        this.r = r;
-        this.level = level;
-    }
-}
-
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
-        List<Integer> innerList = new ArrayList<>();
-        if (root == null)
-            return list;
+        if(root == null) return list;
+        Queue<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        boolean left = true;
 
-        Queue<Pair> q = new ArrayDeque<>();
-        q.add(new Pair(root, 1));
-        int currLevel = 1;
+        while(q.size() > 0){
+            int size = q.size();
+            List<Integer> innerList = new ArrayList<>();
 
-        while (q.size() > 0) {
-            Pair front = q.remove();
+            for(int i=0; i<size; i++){
+                TreeNode x = q.remove();
 
-            // if level is same
-            if (currLevel == front.level) {
-                innerList.add(front.r.val);
-            }
-            /* if level changes then store innerlist in outerlist
-            and innerlist ko new list sa point kr diya, currlevel also increase*/
-            else {
-                if (currLevel % 2 == 0) {
-                    Collections.reverse(innerList);
+                if(left){
+                    innerList.add(x.val);
+                } 
+                else{
+                    innerList.add(0, x.val);
                 }
-                list.add(innerList);
-                innerList = new ArrayList<>();
-                innerList.add(front.r.val);
-                currLevel++;
+                
+
+                if(x.left != null) q.add(x.left);
+                if(x.right != null) q.add(x.right);
             }
 
-            // queue mai left right child insert kr diya
-            if (front.r.left != null)
-                q.add(new Pair(front.r.left, front.level + 1));
-            if (front.r.right != null)
-                q.add(new Pair(front.r.right, front.level + 1));
+            list.add(innerList);
+            left = !left;
         }
-
-        if (currLevel % 2 == 0) {
-            Collections.reverse(innerList);
-        }
-        list.add(innerList);
 
         return list;
     }
